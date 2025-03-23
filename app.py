@@ -5,7 +5,9 @@ st.write("Secrets:", st.secrets)
 # Load API keys securely
 openai.api_key = st.secrets["openai"]["api_key"]
 client = Client(api_key=st.secrets["langsmith"]["api_key"]) 
-
+if client:
+    print("client initializer") 
+    st.write("client initializer")
 
 # Add tracing decorator to monitor the function
 @traceable(name="Sentiment Analysis", metadata={"app": "Streamlit Sentiment Analysis"})
@@ -20,7 +22,7 @@ def sentiment_analysis(text):
                 ],
                 max_tokens=100
             )
-            return response.choices[0].message['content']
+            return response.choices[0].message.content
     except Exception as e:
         client.log_error(str(e))  # Log errors to LangSmith
         return f"Error: {e}"
