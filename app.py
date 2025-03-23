@@ -1,6 +1,6 @@
 import streamlit as st
 import openai
-from langsmith import Client, trace
+from langsmith import Client, traceable
 st.write("Secrets:", st.secrets)
 # Load API keys securely
 openai.api_key = st.secrets["openai"]["api_key"]
@@ -8,7 +8,7 @@ client = Client(api_key=st.secrets["langsmith"]["api_key"])
 
 
 # Add tracing decorator to monitor the function
-@trace(name="Sentiment Analysis", metadata={"app": "Streamlit Sentiment Analysis"})
+@traceable(name="Sentiment Analysis", metadata={"app": "Streamlit Sentiment Analysis"})
 def sentiment_analysis(text): 
     try:
         with st.spinner("Analyzing sentiment..."):
