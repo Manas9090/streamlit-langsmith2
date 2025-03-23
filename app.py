@@ -5,8 +5,8 @@ st.write("Secrets:", st.secrets)
 # Load API keys securely
 openai.api_key = st.secrets["openai"]["api_key"]
 client = Client(
-    api_key=st.secrets["langsmith]["api_key"] 
-    project_name=st.secrets["langsmith]["project_name"]    
+    api_key=st.secrets["langsmith"]["api_key"] 
+    project_name=st.secrets["langsmith"]["project_name"]    
 tracing=st.secrets["langsmith"]["tracing"]
 )
 if client:
